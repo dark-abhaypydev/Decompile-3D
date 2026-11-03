@@ -1,0 +1,366 @@
+[
+  {
+    "id": "esp32_wroom_32",
+    "name": "ESP32 DevKit V1 (30-pin)",
+    "category": "mcu",
+    "description": "Powerful Wi-Fi and Bluetooth 4.2 BLE dual-core microcontroller with 3.3V logic. Ideal for wireless IoT, RC receivers, and telemetry.",
+    "voltage": {
+      "operating": { "min": 4.5, "max": 9.0, "nominal": 5.0 },
+      "logicLevel": 3.3
+    },
+    "size": [5.2, 0.8, 2.8],
+    "model": {
+      "type": "procedural",
+      "shape": "esp32",
+      "dimensions": [5.2, 0.4, 2.8],
+      "pcbColor": "#0f381e",
+      "chipColor": "#1a1a1a"
+    },
+    "pins": [
+      { "id": "VIN", "label": "VIN (5V)", "type": "power", "direction": "in", "voltage": 5.0, "position": [-2.4, 0.2, 1.2] },
+      { "id": "GND_1", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-2.0, 0.2, 1.2] },
+      { "id": "3V3", "label": "3V3", "type": "power", "direction": "out", "voltage": 3.3, "position": [2.4, 0.2, -1.2] },
+      { "id": "GND_2", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [2.0, 0.2, -1.2] },
+      { "id": "D23_MOSI", "label": "D23 (MOSI)", "type": "spi", "direction": "inout", "voltage": 3.3, "position": [-1.6, 0.2, 1.2] },
+      { "id": "D22_SCL", "label": "D22 (SCL)", "type": "i2c", "direction": "inout", "voltage": 3.3, "position": [-1.2, 0.2, 1.2] },
+      { "id": "TX0", "label": "TX0", "type": "uart", "direction": "out", "voltage": 3.3, "position": [-0.8, 0.2, 1.2] },
+      { "id": "RX0", "label": "RX0", "type": "uart", "direction": "in", "voltage": 3.3, "position": [-0.4, 0.2, 1.2] },
+      { "id": "D21_SDA", "label": "D21 (SDA)", "type": "i2c", "direction": "inout", "voltage": 3.3, "position": [0.0, 0.2, 1.2] },
+      { "id": "D19_MISO", "label": "D19 (MISO)", "type": "spi", "direction": "inout", "voltage": 3.3, "position": [0.4, 0.2, 1.2] },
+      { "id": "D18_SCK", "label": "D18 (SCK)", "type": "spi", "direction": "out", "voltage": 3.3, "position": [0.8, 0.2, 1.2] },
+      { "id": "D5_CS", "label": "D5 (CS)", "type": "digital", "direction": "out", "voltage": 3.3, "position": [1.2, 0.2, 1.2] },
+      { "id": "D4_CE", "label": "D4 (CE)", "type": "digital", "direction": "out", "voltage": 3.3, "position": [1.6, 0.2, 1.2] },
+      { "id": "D2_PWM1", "label": "D2 (PWM)", "type": "pwm", "direction": "out", "voltage": 3.3, "position": [-1.6, 0.2, -1.2] },
+      { "id": "D15_PWM2", "label": "D15 (PWM)", "type": "pwm", "direction": "out", "voltage": 3.3, "position": [-1.2, 0.2, -1.2] },
+      { "id": "D13", "label": "D13", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [-0.8, 0.2, -1.2] },
+      { "id": "D12", "label": "D12", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [-0.4, 0.2, -1.2] },
+      { "id": "D14", "label": "D14", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [0.0, 0.2, -1.2] },
+      { "id": "D27", "label": "D27", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [0.4, 0.2, -1.2] },
+      { "id": "D26", "label": "D26", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [0.8, 0.2, -1.2] },
+      { "id": "D25", "label": "D25", "type": "digital", "direction": "inout", "voltage": 3.3, "position": [1.2, 0.2, -1.2] }
+    ],
+    "typicalUses": ["RC Car Telemetry & Receiver", "Wi-Fi Video Streamer", "Bluetooth Remote", "Smart IoT Node"],
+    "commonMistakes": [
+      "Applying 5V directly to GPIO pins will fry the ESP32 (all GPIOs are 3.3V logic max).",
+      "Drawing excessive current (>500mA) from the onboard 3V3 regulator will cause brownout resets."
+    ]
+  },
+  {
+    "id": "arduino_nano",
+    "name": "Arduino Nano (ATmega328P)",
+    "category": "mcu",
+    "description": "Compact, 8-bit 16MHz microcontroller board with 5V logic and USB interface. Reliable and standard for robotics.",
+    "voltage": {
+      "operating": { "min": 7.0, "max": 12.0, "nominal": 9.0 },
+      "logicLevel": 5.0
+    },
+    "size": [4.5, 0.8, 1.8],
+    "model": {
+      "type": "procedural",
+      "shape": "nano",
+      "dimensions": [4.5, 0.4, 1.8],
+      "pcbColor": "#005b5c",
+      "chipColor": "#1a1a1a"
+    },
+    "pins": [
+      { "id": "VIN", "label": "VIN (7-12V)", "type": "power", "direction": "in", "voltage": 9.0, "position": [-2.0, 0.2, 0.8] },
+      { "id": "GND_1", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.6, 0.2, 0.8] },
+      { "id": "5V", "label": "5V", "type": "power", "direction": "out", "voltage": 5.0, "position": [2.0, 0.2, -0.8] },
+      { "id": "3V3", "label": "3V3", "type": "power", "direction": "out", "voltage": 3.3, "position": [1.6, 0.2, -0.8] },
+      { "id": "D2", "label": "D2", "type": "digital", "direction": "inout", "voltage": 5.0, "position": [-1.2, 0.2, 0.8] },
+      { "id": "D3_PWM", "label": "D3 (PWM)", "type": "pwm", "direction": "out", "voltage": 5.0, "position": [-0.8, 0.2, 0.8] },
+      { "id": "D4", "label": "D4", "type": "digital", "direction": "inout", "voltage": 5.0, "position": [-0.4, 0.2, 0.8] },
+      { "id": "D5_PWM", "label": "D5 (PWM)", "type": "pwm", "direction": "out", "voltage": 5.0, "position": [0.0, 0.2, 0.8] },
+      { "id": "D6_PWM", "label": "D6 (PWM)", "type": "pwm", "direction": "out", "voltage": 5.0, "position": [0.4, 0.2, 0.8] },
+      { "id": "D7", "label": "D7", "type": "digital", "direction": "inout", "voltage": 5.0, "position": [0.8, 0.2, 0.8] },
+      { "id": "D8", "label": "D8", "type": "digital", "direction": "inout", "voltage": 5.0, "position": [1.2, 0.2, 0.8] },
+      { "id": "D9_PWM", "label": "D9 (PWM)", "type": "pwm", "direction": "out", "voltage": 5.0, "position": [-1.2, 0.2, -0.8] },
+      { "id": "D10_SS", "label": "D10 (SS/PWM)", "type": "spi", "direction": "out", "voltage": 5.0, "position": [-0.8, 0.2, -0.8] },
+      { "id": "D11_MOSI", "label": "D11 (MOSI)", "type": "spi", "direction": "out", "voltage": 5.0, "position": [-0.4, 0.2, -0.8] },
+      { "id": "D12_MISO", "label": "D12 (MISO)", "type": "spi", "direction": "in", "voltage": 5.0, "position": [0.0, 0.2, -0.8] },
+      { "id": "D13_SCK", "label": "D13 (SCK)", "type": "spi", "direction": "out", "voltage": 5.0, "position": [0.4, 0.2, -0.8] },
+      { "id": "A4_SDA", "label": "A4 (SDA)", "type": "i2c", "direction": "inout", "voltage": 5.0, "position": [0.8, 0.2, -0.8] },
+      { "id": "A5_SCL", "label": "A5 (SCL)", "type": "i2c", "direction": "out", "voltage": 5.0, "position": [1.2, 0.2, -0.8] }
+    ],
+    "typicalUses": ["Robotics Brain", "Sensor Readout", "RC Transmitter / Remote", "PWM Motor Control"],
+    "commonMistakes": [
+      "Connecting 5V logic directly to 3.3V modules like NRF24 or LoRa without level shifting or 3.3V supply.",
+      "Inputting reverse polarity to VIN pin damages the internal linear regulator."
+    ]
+  },
+  {
+    "id": "hc05_bluetooth",
+    "name": "HC-05 Bluetooth Module",
+    "category": "wireless",
+    "description": "Standard Bluetooth 2.0 SPP module for serial wireless link with smartphones and computers.",
+    "voltage": {
+      "operating": { "min": 3.6, "max": 6.0, "nominal": 5.0 },
+      "logicLevel": 3.3
+    },
+    "size": [3.8, 0.6, 1.6],
+    "model": {
+      "type": "procedural",
+      "shape": "hc05",
+      "dimensions": [3.8, 0.3, 1.6],
+      "pcbColor": "#102a6b",
+      "chipColor": "#222222"
+    },
+    "pins": [
+      { "id": "VCC", "label": "VCC (5V)", "type": "power", "direction": "in", "voltage": 5.0, "position": [-1.5, 0.15, 0.6] },
+      { "id": "GND", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.5, 0.15, 0.35] },
+      { "id": "TXD", "label": "TXD (3.3V)", "type": "uart", "direction": "out", "voltage": 3.3, "position": [-1.5, 0.15, 0.1] },
+      { "id": "RXD", "label": "RXD (3.3V)", "type": "uart", "direction": "in", "voltage": 3.3, "position": [-1.5, 0.15, -0.15] },
+      { "id": "STATE", "label": "STATE", "type": "digital", "direction": "out", "voltage": 3.3, "position": [-1.5, 0.15, -0.4] },
+      { "id": "EN", "label": "EN", "type": "digital", "direction": "in", "voltage": 3.3, "position": [-1.5, 0.15, -0.65] }
+    ],
+    "typicalUses": ["Smartphone RC Car Control", "Wireless Serial Debugger", "Short-range Telemetry (<10m)"],
+    "commonMistakes": [
+      "HC-05 RXD pin is 3.3V logic level! If sending from a 5V MCU (like Arduino Nano TX), use a 1k/2k ohm resistor voltage divider.",
+      "Connecting RX to RX and TX to TX (must connect MCU TX to Module RX, and MCU RX to Module TX)."
+    ]
+  },
+  {
+    "id": "nrf24l01_pa_lna",
+    "name": "NRF24L01+ PA LNA (Antenna)",
+    "category": "wireless",
+    "description": "High-power 2.4GHz RF transceiver module with Power Amplifier (PA), Low Noise Amplifier (LNA), and external SMA antenna for up to 1000m range.",
+    "voltage": {
+      "operating": { "min": 1.9, "max": 3.6, "nominal": 3.3 },
+      "logicLevel": 3.3
+    },
+    "size": [4.1, 2.5, 1.6],
+    "model": {
+      "type": "procedural",
+      "shape": "nrf24",
+      "dimensions": [4.1, 0.5, 1.6],
+      "pcbColor": "#192219",
+      "chipColor": "#111111"
+    },
+    "pins": [
+      { "id": "GND", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.8, 0.25, -0.3] },
+      { "id": "VCC", "label": "VCC (3.3V ONLY)", "type": "power", "direction": "in", "voltage": 3.3, "position": [-1.8, 0.25, 0.3] },
+      { "id": "CE", "label": "CE", "type": "digital", "direction": "in", "voltage": 3.3, "position": [-1.4, 0.25, -0.3] },
+      { "id": "CSN", "label": "CSN", "type": "spi", "direction": "in", "voltage": 3.3, "position": [-1.4, 0.25, 0.3] },
+      { "id": "SCK", "label": "SCK", "type": "spi", "direction": "in", "voltage": 3.3, "position": [-1.0, 0.25, -0.3] },
+      { "id": "MOSI", "label": "MOSI", "type": "spi", "direction": "in", "voltage": 3.3, "position": [-1.0, 0.25, 0.3] },
+      { "id": "MISO", "label": "MISO", "type": "spi", "direction": "out", "voltage": 3.3, "position": [-0.6, 0.25, -0.3] },
+      { "id": "IRQ", "label": "IRQ", "type": "digital", "direction": "out", "voltage": 3.3, "position": [-0.6, 0.25, 0.3] }
+    ],
+    "typicalUses": ["Long-Range RC Car Remote Control", "Drone Telemetry", "High-Speed 2Mbps RF Link"],
+    "commonMistakes": [
+      "CRITICAL: VCC must be 3.3V! Connecting VCC to 5V will permanently burn the NRF24 chip.",
+      "Power dips during RF transmission cause dropped packets. Always solder a 10uF–47uF capacitor directly across VCC and GND pins."
+    ]
+  },
+  {
+    "id": "lora_sx1278",
+    "name": "LoRa SX1278 Ra-02 (433MHz)",
+    "category": "wireless",
+    "description": "Ultra long-range spread-spectrum RF module capable of transmitting over 3km to 5km with high interference immunity.",
+    "voltage": {
+      "operating": { "min": 2.7, "max": 3.6, "nominal": 3.3 },
+      "logicLevel": 3.3
+    },
+    "size": [2.5, 1.2, 2.0],
+    "model": {
+      "type": "procedural",
+      "shape": "lora",
+      "dimensions": [2.5, 0.4, 2.0],
+      "pcbColor": "#004020",
+      "chipColor": "#252525"
+    },
+    "pins": [
+      { "id": "GND", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.0, 0.2, 0.8] },
+      { "id": "3V3", "label": "3V3 VCC", "type": "power", "direction": "in", "voltage": 3.3, "position": [-1.0, 0.2, 0.5] },
+      { "id": "RST", "label": "RST", "type": "digital", "direction": "in", "voltage": 3.3, "position": [-1.0, 0.2, 0.2] },
+      { "id": "DIO0", "label": "DIO0 (IRQ)", "type": "digital", "direction": "out", "voltage": 3.3, "position": [-1.0, 0.2, -0.1] },
+      { "id": "SCK", "label": "SCK", "type": "spi", "direction": "in", "voltage": 3.3, "position": [1.0, 0.2, 0.8] },
+      { "id": "MISO", "label": "MISO", "type": "spi", "direction": "out", "voltage": 3.3, "position": [1.0, 0.2, 0.5] },
+      { "id": "MOSI", "label": "MOSI", "type": "spi", "direction": "in", "voltage": 3.3, "position": [1.0, 0.2, 0.2] },
+      { "id": "NSS", "label": "NSS (CS)", "type": "spi", "direction": "in", "voltage": 3.3, "position": [1.0, 0.2, -0.1] }
+    ],
+    "typicalUses": ["Extreme Range RC Telemetry", "Smart Agriculture", "Outdoor Autonomous Rover Link"],
+    "commonMistakes": [
+      "Operating or transmitting without an antenna connected will reflect power back and destroy the RF transmitter.",
+      "Never connect to 5V power or 5V logic."
+    ]
+  },
+  {
+    "id": "l298n_motor_driver",
+    "name": "L298N Dual H-Bridge Motor Driver",
+    "category": "motor-driver",
+    "description": "High-power dual H-bridge motor driver module capable of driving two DC motors (or one stepper) up to 2A per channel with speed and direction control.",
+    "voltage": {
+      "operating": { "min": 5.0, "max": 35.0, "nominal": 12.0 },
+      "logicLevel": 5.0
+    },
+    "size": [4.3, 2.7, 4.3],
+    "model": {
+      "type": "procedural",
+      "shape": "l298n",
+      "dimensions": [4.3, 2.7, 4.3],
+      "pcbColor": "#7f1d1d",
+      "chipColor": "#222222"
+    },
+    "pins": [
+      { "id": "12V_VMS", "label": "12V (Motor Power)", "type": "power", "direction": "in", "voltage": 12.0, "position": [-1.6, 0.4, 1.8] },
+      { "id": "GND", "label": "GND (Common)", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.1, 0.4, 1.8] },
+      { "id": "5V_OUT", "label": "5V (Logic/Reg Out)", "type": "power", "direction": "out", "voltage": 5.0, "position": [-0.6, 0.4, 1.8] },
+      { "id": "ENA", "label": "ENA (Speed A)", "type": "pwm", "direction": "in", "voltage": 5.0, "position": [0.3, 0.2, 1.8] },
+      { "id": "IN1", "label": "IN1 (Dir A1)", "type": "digital", "direction": "in", "voltage": 5.0, "position": [0.6, 0.2, 1.8] },
+      { "id": "IN2", "label": "IN2 (Dir A2)", "type": "digital", "direction": "in", "voltage": 5.0, "position": [0.9, 0.2, 1.8] },
+      { "id": "IN3", "label": "IN3 (Dir B1)", "type": "digital", "direction": "in", "voltage": 5.0, "position": [1.2, 0.2, 1.8] },
+      { "id": "IN4", "label": "IN4 (Dir B2)", "type": "digital", "direction": "in", "voltage": 5.0, "position": [1.5, 0.2, 1.8] },
+      { "id": "ENB", "label": "ENB (Speed B)", "type": "pwm", "direction": "in", "voltage": 5.0, "position": [1.8, 0.2, 1.8] },
+      { "id": "OUT1", "label": "OUT1 (Motor A+)", "type": "power", "direction": "out", "voltage": 12.0, "position": [-1.8, 0.4, -0.6] },
+      { "id": "OUT2", "label": "OUT2 (Motor A-)", "type": "power", "direction": "out", "voltage": 12.0, "position": [-1.8, 0.4, 0.6] },
+      { "id": "OUT3", "label": "OUT3 (Motor B+)", "type": "power", "direction": "out", "voltage": 12.0, "position": [1.8, 0.4, -0.6] },
+      { "id": "OUT4", "label": "OUT4 (Motor B-)", "type": "power", "direction": "out", "voltage": 12.0, "position": [1.8, 0.4, 0.6] }
+    ],
+    "typicalUses": ["RC Car Left/Right Drive Motors", "Differential Steering Robot", "Heavy Load Actuator"],
+    "commonMistakes": [
+      "Failing to connect GND of L298N to MCU GND (Common Ground is mandatory for PWM signals to work).",
+      "Leaving the 5V enable jumper plugged in when feeding more than 12V into VMS will overheat and burn the 78M05 voltage regulator."
+    ]
+  },
+  {
+    "id": "dc_gear_motor",
+    "name": "TT DC Gearbox Motor (with Wheel)",
+    "category": "motor",
+    "description": "Standard 3V-6V yellow gearbox DC motor with high torque and rubber tire wheel for robotic vehicle propulsion.",
+    "voltage": {
+      "operating": { "min": 3.0, "max": 6.0, "nominal": 5.0 },
+      "logicLevel": 5.0
+    },
+    "size": [6.5, 3.0, 2.5],
+    "model": {
+      "type": "procedural",
+      "shape": "gear_motor",
+      "dimensions": [6.5, 3.0, 2.5],
+      "pcbColor": "#eab308",
+      "chipColor": "#1e293b"
+    },
+    "pins": [
+      { "id": "MOTOR_POS", "label": "M+ (Terminal 1)", "type": "power", "direction": "in", "voltage": 6.0, "position": [-2.2, 0.3, 0.5] },
+      { "id": "MOTOR_NEG", "label": "M- (Terminal 2)", "type": "gnd", "direction": "in", "voltage": 0.0, "position": [-2.2, 0.3, -0.5] }
+    ],
+    "typicalUses": ["RC Car Wheel Traction", "Mobile Robot Chassis Drive", "Conveyor Belt Movement"],
+    "commonMistakes": [
+      "Never connect motor terminals directly to an Arduino or ESP32 pin; the high stall current and back-EMF inductive spikes will immediately kill the MCU.",
+      "Swapping M+ and M- merely inverts rotation direction (can be reversed in software or wiring)."
+    ]
+  },
+  {
+    "id": "lipo_2s_battery",
+    "name": "7.4V 2S LiPo / 18650 Battery Pack",
+    "category": "power",
+    "description": "High-discharge rechargeable 7.4V nominal (8.4V fully charged) dual-cell lithium battery pack for mobile vehicles and motors.",
+    "voltage": {
+      "operating": { "min": 6.0, "max": 8.4, "nominal": 7.4 },
+      "logicLevel": 7.4
+    },
+    "size": [7.0, 2.0, 3.8],
+    "model": {
+      "type": "procedural",
+      "shape": "battery",
+      "dimensions": [7.0, 2.0, 3.8],
+      "pcbColor": "#1e293b",
+      "chipColor": "#0f172a"
+    },
+    "pins": [
+      { "id": "BAT_POS", "label": "BAT+ (+7.4V)", "type": "power", "direction": "out", "voltage": 7.4, "position": [3.2, 0.5, 0.8] },
+      { "id": "BAT_NEG", "label": "BAT- (GND)", "type": "gnd", "direction": "out", "voltage": 0.0, "position": [3.2, 0.5, -0.8] }
+    ],
+    "typicalUses": ["Main High-Power Source for RC Vehicles", "Heavy Motors and Servos Supply", "Portable Field Power"],
+    "commonMistakes": [
+      "Over-discharging below 3.0V per cell (6.0V total) permanently ruins the battery cells.",
+      "Short-circuiting the positive and negative leads causes instantaneous fire/smoke risk."
+    ]
+  },
+  {
+    "id": "buck_lm2596",
+    "name": "LM2596 Step-Down Buck Converter",
+    "category": "power",
+    "description": "High-efficiency DC-DC switching step-down regulator. Steps down high motor battery voltage (e.g. 7.4V-12V) into clean 5.0V or 3.3V power rails.",
+    "voltage": {
+      "operating": { "min": 4.0, "max": 40.0, "nominal": 12.0 },
+      "logicLevel": 5.0
+    },
+    "size": [4.3, 1.5, 2.1],
+    "model": {
+      "type": "procedural",
+      "shape": "buck",
+      "dimensions": [4.3, 1.5, 2.1],
+      "pcbColor": "#1e3a8a",
+      "chipColor": "#111111"
+    },
+    "pins": [
+      { "id": "IN_POS", "label": "IN+ (+4V to 40V)", "type": "power", "direction": "in", "voltage": 12.0, "position": [-1.9, 0.2, 0.7] },
+      { "id": "IN_NEG", "label": "IN- (GND)", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [-1.9, 0.2, -0.7] },
+      { "id": "OUT_POS", "label": "OUT+ (Regulated 5V)", "type": "power", "direction": "out", "voltage": 5.0, "position": [1.9, 0.2, 0.7] },
+      { "id": "OUT_NEG", "label": "OUT- (GND)", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [1.9, 0.2, -0.7] }
+    ],
+    "typicalUses": ["Stepping 7.4V/11.1V Battery down to 5V for MCU/Servos", "Decoupling High-Noise Motor Supply from Clean Logic"],
+    "commonMistakes": [
+      "It is a buck converter only; input voltage must be at least 1.5V higher than output voltage.",
+      "Always verify output voltage with a multimeter before connecting sensitive microcontrollers."
+    ]
+  },
+  {
+    "id": "servo_sg90",
+    "name": "SG90 9g Micro Servo Motor",
+    "category": "motor",
+    "description": "Lightweight 180-degree positional feedback servo motor, standard for RC car steering racks and robotic arms.",
+    "voltage": {
+      "operating": { "min": 4.8, "max": 6.0, "nominal": 5.0 },
+      "logicLevel": 5.0
+    },
+    "size": [2.3, 2.9, 1.2],
+    "model": {
+      "type": "procedural",
+      "shape": "servo",
+      "dimensions": [2.3, 2.9, 1.2],
+      "pcbColor": "#2563eb",
+      "chipColor": "#1e40af"
+    },
+    "pins": [
+      { "id": "GND", "label": "GND (Brown)", "type": "gnd", "direction": "in", "voltage": 0.0, "position": [0.0, -1.2, 0.4] },
+      { "id": "VCC", "label": "VCC (Red 5V)", "type": "power", "direction": "in", "voltage": 5.0, "position": [0.0, -1.2, 0.0] },
+      { "id": "PWM_SIG", "label": "PWM (Orange Sig)", "type": "pwm", "direction": "in", "voltage": 5.0, "position": [0.0, -1.2, -0.4] }
+    ],
+    "typicalUses": ["RC Car Steering Linkage", "Obstacle Sensor Pan/Tilt", "Robotic Gripper Actuator"],
+    "commonMistakes": [
+      "Powering servo VCC directly from an MCU 5V pin can cause brownout reboots due to current draw spikes (up to 500mA on stall). Power from buck converter or external 5V rail.",
+      "Connecting brown/orange backwards."
+    ]
+  },
+  {
+    "id": "ultrasonic_hcsr04",
+    "name": "HC-SR04 Ultrasonic Distance Sensor",
+    "category": "sensor",
+    "description": "Sonar ranging sensor providing 2cm to 400cm non-contact distance measurement for autonomous obstacle avoidance.",
+    "voltage": {
+      "operating": { "min": 4.5, "max": 5.5, "nominal": 5.0 },
+      "logicLevel": 5.0
+    },
+    "size": [4.5, 2.0, 1.5],
+    "model": {
+      "type": "procedural",
+      "shape": "ultrasonic",
+      "dimensions": [4.5, 2.0, 1.5],
+      "pcbColor": "#0284c7",
+      "chipColor": "#0369a1"
+    },
+    "pins": [
+      { "id": "VCC", "label": "VCC (5V)", "type": "power", "direction": "in", "voltage": 5.0, "position": [-0.6, -0.8, 0.4] },
+      { "id": "TRIG", "label": "TRIG (Trigger Pulse)", "type": "digital", "direction": "in", "voltage": 5.0, "position": [-0.2, -0.8, 0.4] },
+      { "id": "ECHO", "label": "ECHO (5V Echo Pulse)", "type": "digital", "direction": "out", "voltage": 5.0, "position": [0.2, -0.8, 0.4] },
+      { "id": "GND", "label": "GND", "type": "gnd", "direction": "inout", "voltage": 0.0, "position": [0.6, -0.8, 0.4] }
+    ],
+    "typicalUses": ["Autonomous Obstacle Detection & Avoidance", "Range Finding", "Distance Telemetry"],
+    "commonMistakes": [
+      "The ECHO pin outputs 5V logic pulses! When reading with an ESP32 (3.3V logic), use a voltage divider (1k & 2k resistors) to prevent damaging the ESP32 GPIO pin.",
+      "Hard reflective surfaces angled away from the sensor can produce ghost or infinite readings."
+    ]
+  }
+]

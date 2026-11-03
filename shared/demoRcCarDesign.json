@@ -1,0 +1,319 @@
+{
+  "title": "Long-Range RC Car Controller & Drive System",
+  "summary": "High-power 2.4GHz RF remote-controlled rover circuit featuring ESP32 microcontroller, NRF24L01+PA+LNA for up to 1km telemetry/control, L298N dual DC motor driver for differential drive, SG90 steering servo, and LM2596 buck converter for clean separated power rails.",
+  "components": [
+    {
+      "instanceId": "mcu_esp32",
+      "componentId": "esp32_wroom_32",
+      "position": [0, 0.4, 0],
+      "rotation": [0, 0, 0],
+      "notes": "Central processing brain handling RF packet parsing, motor PWM generation, and telemetry."
+    },
+    {
+      "instanceId": "rf_nrf24",
+      "componentId": "nrf24l01_pa_lna",
+      "position": [-6.5, 0.4, -4.5],
+      "rotation": [0, 0, 0],
+      "notes": "2.4GHz long-range wireless receiver with external high-gain antenna."
+    },
+    {
+      "instanceId": "driver_l298n",
+      "componentId": "l298n_motor_driver",
+      "position": [6.5, 0.4, 0],
+      "rotation": [0, 0, 0],
+      "notes": "Dual H-bridge driver delivering high current to left and right DC gear motors."
+    },
+    {
+      "instanceId": "motor_left",
+      "componentId": "dc_gear_motor",
+      "position": [13.5, 0.4, -4.5],
+      "rotation": [0, 0, 0],
+      "notes": "Left drive wheel motor with rubber tire."
+    },
+    {
+      "instanceId": "motor_right",
+      "componentId": "dc_gear_motor",
+      "position": [13.5, 0.4, 4.5],
+      "rotation": [0, 0, 0],
+      "notes": "Right drive wheel motor with rubber tire."
+    },
+    {
+      "instanceId": "steering_servo",
+      "componentId": "servo_sg90",
+      "position": [-6.5, 0.4, 4.5],
+      "rotation": [0, 0, 0],
+      "notes": "High precision 180-degree micro servo for front steering rack."
+    },
+    {
+      "instanceId": "power_battery",
+      "componentId": "lipo_2s_battery",
+      "position": [0, 0.4, 7.5],
+      "rotation": [0, 0, 0],
+      "notes": "7.4V nominal 2S LiPo / dual 18650 pack providing raw motor and system power."
+    },
+    {
+      "instanceId": "power_buck",
+      "componentId": "buck_lm2596",
+      "position": [0, 0.4, -7.5],
+      "rotation": [0, 0, 0],
+      "notes": "Steps down battery 7.4V to smooth, noise-isolated 5.0V for MCU and logic."
+    },
+    {
+      "instanceId": "sensor_sonar",
+      "componentId": "ultrasonic_hcsr04",
+      "position": [-12.5, 0.4, 0],
+      "rotation": [0, 0, 0],
+      "notes": "Front distance sensor for automatic emergency braking and obstacle collision prevention."
+    }
+  ],
+  "connections": [
+    {
+      "from": { "instanceId": "power_battery", "pinId": "BAT_POS" },
+      "to": { "instanceId": "power_buck", "pinId": "IN_POS" },
+      "signal": "power",
+      "note": "Main 7.4V battery input to buck step-down converter"
+    },
+    {
+      "from": { "instanceId": "power_battery", "pinId": "BAT_POS" },
+      "to": { "instanceId": "driver_l298n", "pinId": "12V_VMS" },
+      "signal": "power",
+      "note": "Raw 7.4V battery directly powers the L298N motor driver rail"
+    },
+    {
+      "from": { "instanceId": "power_battery", "pinId": "BAT_NEG" },
+      "to": { "instanceId": "power_buck", "pinId": "IN_NEG" },
+      "signal": "gnd",
+      "note": "Battery return to buck converter ground"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_NEG" },
+      "to": { "instanceId": "driver_l298n", "pinId": "GND" },
+      "signal": "gnd",
+      "note": "Common ground link tying motor power ground to regulated ground"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_POS" },
+      "to": { "instanceId": "mcu_esp32", "pinId": "VIN" },
+      "signal": "power",
+      "note": "Regulated clean 5V output powers ESP32 VIN pin"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_NEG" },
+      "to": { "instanceId": "mcu_esp32", "pinId": "GND_1" },
+      "signal": "gnd",
+      "note": "Common ground link to ESP32 ground"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "3V3" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "VCC" },
+      "signal": "power",
+      "note": "Clean 3.3V rail from ESP32 dedicated regulator to NRF24L01 (DO NOT USE 5V)"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "GND_2" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "GND" },
+      "signal": "gnd",
+      "note": "RF ground return"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D18_SCK" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "SCK" },
+      "signal": "spi",
+      "note": "Hardware SPI Clock line"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D19_MISO" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "MISO" },
+      "signal": "spi",
+      "note": "Hardware SPI Master-In Slave-Out"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D23_MOSI" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "MOSI" },
+      "signal": "spi",
+      "note": "Hardware SPI Master-Out Slave-In"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D5_CS" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "CSN" },
+      "signal": "data",
+      "note": "SPI Chip Select Not"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D4_CE" },
+      "to": { "instanceId": "rf_nrf24", "pinId": "CE" },
+      "signal": "data",
+      "note": "RF Chip Enable line for transmit/receive activation"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D2_PWM1" },
+      "to": { "instanceId": "driver_l298n", "pinId": "ENA" },
+      "signal": "pwm",
+      "note": "PWM speed control signal for Left Motor"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D15_PWM2" },
+      "to": { "instanceId": "driver_l298n", "pinId": "ENB" },
+      "signal": "pwm",
+      "note": "PWM speed control signal for Right Motor"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D13" },
+      "to": { "instanceId": "driver_l298n", "pinId": "IN1" },
+      "signal": "data",
+      "note": "Left motor direction pin 1"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D12" },
+      "to": { "instanceId": "driver_l298n", "pinId": "IN2" },
+      "signal": "data",
+      "note": "Left motor direction pin 2"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D14" },
+      "to": { "instanceId": "driver_l298n", "pinId": "IN3" },
+      "signal": "data",
+      "note": "Right motor direction pin 1"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D27" },
+      "to": { "instanceId": "driver_l298n", "pinId": "IN4" },
+      "signal": "data",
+      "note": "Right motor direction pin 2"
+    },
+    {
+      "from": { "instanceId": "driver_l298n", "pinId": "OUT1" },
+      "to": { "instanceId": "motor_left", "pinId": "MOTOR_POS" },
+      "signal": "power",
+      "note": "Left motor terminal A drive"
+    },
+    {
+      "from": { "instanceId": "driver_l298n", "pinId": "OUT2" },
+      "to": { "instanceId": "motor_left", "pinId": "MOTOR_NEG" },
+      "signal": "power",
+      "note": "Left motor terminal B drive"
+    },
+    {
+      "from": { "instanceId": "driver_l298n", "pinId": "OUT3" },
+      "to": { "instanceId": "motor_right", "pinId": "MOTOR_POS" },
+      "signal": "power",
+      "note": "Right motor terminal A drive"
+    },
+    {
+      "from": { "instanceId": "driver_l298n", "pinId": "OUT4" },
+      "to": { "instanceId": "motor_right", "pinId": "MOTOR_NEG" },
+      "signal": "power",
+      "note": "Right motor terminal B drive"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_POS" },
+      "to": { "instanceId": "steering_servo", "pinId": "VCC" },
+      "signal": "power",
+      "note": "Power servo from 5V buck converter to avoid MCU current brownouts"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_NEG" },
+      "to": { "instanceId": "steering_servo", "pinId": "GND" },
+      "signal": "gnd",
+      "note": "Servo ground line"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D26" },
+      "to": { "instanceId": "steering_servo", "pinId": "PWM_SIG" },
+      "signal": "pwm",
+      "note": "50Hz PWM steering position signal from ESP32 to servo horn"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_POS" },
+      "to": { "instanceId": "sensor_sonar", "pinId": "VCC" },
+      "signal": "power",
+      "note": "5V power to ultrasonic distance sensor"
+    },
+    {
+      "from": { "instanceId": "power_buck", "pinId": "OUT_NEG" },
+      "to": { "instanceId": "sensor_sonar", "pinId": "GND" },
+      "signal": "gnd",
+      "note": "Ultrasonic ground line"
+    },
+    {
+      "from": { "instanceId": "mcu_esp32", "pinId": "D25" },
+      "to": { "instanceId": "sensor_sonar", "pinId": "TRIG" },
+      "signal": "data",
+      "note": "10 microsecond trigger pulse line from ESP32"
+    }
+  ],
+  "explanations": [
+    {
+      "instanceId": "mcu_esp32",
+      "role": "Brain / Central Flight Computer",
+      "whyThisPart": "Dual core 240MHz MCU gives enough horsepower to decode NRF24 packets in real-time while smoothly updating hardware PWM timers for motor speed and steering without jitter.",
+      "whatItDoes": "Receives user control commands via SPI from the NRF24L01 module, computes differential drive speeds, generates PWM signals for motor forward/reverse and steering, and monitors ultrasonic safety bounds."
+    },
+    {
+      "instanceId": "rf_nrf24",
+      "role": "Long-Range RF Telemetry Link",
+      "whyThisPart": "PA+LNA variant with external SMA dipole antenna achieves up to 1000m line-of-sight range on the 2.4GHz ISM band, vastly outperforming built-in Bluetooth (which drops at 10m).",
+      "whatItDoes": "Listens for remote transmitter joystick packets with CRC check and hands data over high-speed hardware SPI to the ESP32."
+    },
+    {
+      "instanceId": "driver_l298n",
+      "role": "High-Current Motor Actuator",
+      "whyThisPart": "Robust dual H-bridge capable of handling up to 2A continuous inductive load per motor channel with large heatsink dissipation.",
+      "whatItDoes": "Translates low-power ESP32 logic PWM and directional signals into high-current pulsed battery power to spin the DC drive motors forward, backward, or brake."
+    },
+    {
+      "instanceId": "motor_left",
+      "role": "Left Traction Propulsion",
+      "whyThisPart": "Gear ratio provides high torque for traversing rough outdoor terrain and climbing inclines.",
+      "whatItDoes": "Spins the left rubber tire wheel based on H-bridge output."
+    },
+    {
+      "instanceId": "motor_right",
+      "role": "Right Traction Propulsion",
+      "whyThisPart": "Paired with the left motor to achieve differential skid-steer and agile zero-radius turns.",
+      "whatItDoes": "Spins the right rubber tire wheel."
+    },
+    {
+      "instanceId": "steering_servo",
+      "role": "Front Steering Rack Control",
+      "whyThisPart": "Standard 9g positional servo provides closed-loop angular feedback from 0 to 180 degrees.",
+      "whatItDoes": "Pivots the front wheel linkage left or right in response to 50Hz PWM pulses from the ESP32."
+    },
+    {
+      "instanceId": "power_battery",
+      "role": "Primary Power Reservoir",
+      "whyThisPart": "2S LiPo / dual 18650 cells deliver 7.4V nominal with high instantaneous discharge C-rating needed during motor stall and acceleration bursts.",
+      "whatItDoes": "Supplies raw energy to both the high-drain motor driver and the buck regulator."
+    },
+    {
+      "instanceId": "power_buck",
+      "role": "Regulated Clean Power Rail",
+      "whyThisPart": "Switching step-down efficiency (>90%) prevents severe heat generation compared to linear regulators and decouples electrical motor brush noise from sensitive RF/MCU electronics.",
+      "whatItDoes": "Converts fluctuating 6.0V–8.4V battery voltage down into rock-solid 5.0V power for the ESP32, servo, and sonar sensor."
+    },
+    {
+      "instanceId": "sensor_sonar",
+      "role": "Emergency Collision Brake Sensor",
+      "whyThisPart": "Non-contact 40kHz sonar ranging from 2cm to 400cm is immune to sunlight and dark surfaces.",
+      "whatItDoes": "Fires ultrasonic pulses ahead of the vehicle. If an obstacle is detected within 25cm, software overrides throttle and stops the motors."
+    }
+  ],
+  "warnings": [
+    "SAFETY: Always connect NRF24L01 VCC strictly to the 3.3V rail. Connecting to 5V will instantly destroy the RF chip.",
+    "COMMON GROUND: The battery negative, LM2596 OUT-, L298N GND, and ESP32 GND must all be connected to a single common ground star point.",
+    "MOTOR NOISE: DC motor brushes generate high-voltage inductive spikes. Solder a 100nF ceramic capacitor directly across each DC motor's terminals to suppress electromagnetic interference.",
+    "SERVO CURRENT: Power the SG90 servo from the LM2596 5V output, NEVER from the ESP32 3V3 pin. Servo stall current can exceed 500mA and crash the MCU.",
+    "LEVEL SHIFTING: The HC-SR04 ECHO pin outputs 5V logic pulses. Use a 1k/2k ohm resistor voltage divider before connecting to the ESP32 GPIO."
+  ],
+  "buildSteps": [
+    "Step 1: Mount the ESP32, LM2596 buck converter, and L298N motor driver securely onto the car chassis plate.",
+    "Step 2: Connect the battery pack leads to the LM2596 IN+ and IN- terminals. Use a multimeter to turn the potentiometer screw until OUT+ reads exactly 5.0V.",
+    "Step 3: Connect LM2596 OUT+ to ESP32 VIN, Servo VCC, and HC-SR04 VCC.",
+    "Step 4: Establish the Common Ground Bus by connecting battery BAT-, buck OUT-, L298N GND, and ESP32 GND together.",
+    "Step 5: Connect NRF24L01 VCC to ESP32 3V3, GND to GND, and wire the hardware SPI lines (MOSI->D23, MISO->D19, SCK->D18, CSN->D5, CE->D4). Solder a 10uF capacitor across NRF24 VCC/GND.",
+    "Step 6: Wire the L298N control headers (ENA->D2, ENB->D15, IN1->D13, IN2->D12, IN3->D14, IN4->D27) and connect OUT1/OUT2 and OUT3/OUT4 to the left and right DC motors.",
+    "Step 7: Connect the SG90 steering servo PWM line to ESP32 D26.",
+    "Step 8: Connect HC-SR04 TRIG to ESP32 D25. Connect ECHO through a 1k/2k resistor voltage divider to ESP32 D33.",
+    "Step 9: Flash the firmware, turn on the handheld NRF24 transmitter, and test motor throttle and steering responsiveness!"
+  ]
+}

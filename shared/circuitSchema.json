@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CircuitDesign",
+  "description": "Decompile3D Circuit & Board Design Single Source of Truth Schema",
+  "type": "object",
+  "required": ["title", "summary", "components", "connections"],
+  "properties": {
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["instanceId", "componentId"],
+        "properties": {
+          "instanceId": { "type": "string" },
+          "componentId": { "type": "string" },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "signal"],
+        "properties": {
+          "from": {
+            "type": "object",
+            "required": ["instanceId", "pinId"],
+            "properties": {
+              "instanceId": { "type": "string" },
+              "pinId": { "type": "string" }
+            }
+          },
+          "to": {
+            "type": "object",
+            "required": ["instanceId", "pinId"],
+            "properties": {
+              "instanceId": { "type": "string" },
+              "pinId": { "type": "string" }
+            }
+          },
+          "signal": {
+            "type": "string",
+            "enum": ["power", "gnd", "data", "pwm", "spi", "i2c", "uart"]
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "explanations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["instanceId", "role", "whyThisPart", "whatItDoes"],
+        "properties": {
+          "instanceId": { "type": "string" },
+          "role": { "type": "string" },
+          "whyThisPart": { "type": "string" },
+          "whatItDoes": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "buildSteps": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
